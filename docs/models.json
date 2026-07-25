@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "models": [
     {
-      "id": "gpt-4o-mini",
-      "providerId": "chatgpt_4o_mini",
-      "displayName": "GPT-4o mini",
-      "shortName": "4o mini",
+      "id": "gpt-5-mini",
+      "providerId": "chatgpt_5_mini",
+      "displayName": "GPT-5 mini",
+      "shortName": "GPT-5 mini",
       "icon": { "type": "asset", "value": "OpenAIProvider" },
       "family": "openai",
       "externalFamily": "openai",
@@ -13,15 +13,26 @@
       "tier": "economy"
     },
     {
-      "id": "gpt-4o",
-      "providerId": "chatgpt_4o",
-      "displayName": "GPT-4o",
-      "shortName": "4o",
+      "id": "gpt-4.1",
+      "providerId": "chatgpt_4_1",
+      "displayName": "GPT-4.1",
+      "shortName": "GPT-4.1",
       "icon": { "type": "asset", "value": "OpenAIProvider" },
       "family": "openai",
       "externalFamily": "openai",
       "roles": ["translator", "reviewer"],
       "tier": "standard"
+    },
+    {
+      "id": "gpt-5",
+      "providerId": "chatgpt_5",
+      "displayName": "GPT-5",
+      "shortName": "GPT-5",
+      "icon": { "type": "asset", "value": "OpenAIProvider" },
+      "family": "openai",
+      "externalFamily": "openai",
+      "roles": ["reviewer"],
+      "tier": "premium"
     },
     {
       "id": "claude-haiku-4-5",
