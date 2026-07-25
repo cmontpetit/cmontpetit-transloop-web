@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "models": [
+    {
+      "id": "gpt-4o-mini",
+      "providerId": "chatgpt_4o_mini",
+      "displayName": "GPT-4o mini",
+      "shortName": "4o mini",
+      "icon": { "type": "asset", "value": "OpenAIProvider" },
+      "family": "openai",
+      "externalFamily": "openai",
+      "roles": ["translator", "reviewer"],
+      "tier": "economy"
+    },
+    {
+      "id": "gpt-4o",
+      "providerId": "chatgpt_4o",
+      "displayName": "GPT-4o",
+      "shortName": "4o",
+      "icon": { "type": "asset", "value": "OpenAIProvider" },
+      "family": "openai",
+      "externalFamily": "openai",
+      "roles": ["translator", "reviewer"],
+      "tier": "standard"
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "providerId": "claude_haiku",
+      "displayName": "Claude Haiku",
+      "shortName": "Haiku",
+      "icon": { "type": "system", "value": "brain.head.profile" },
+      "family": "claude",
+      "externalFamily": "anthropic",
+      "roles": ["translator", "reviewer"],
+      "tier": "economy"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "providerId": "claude_sonnet",
+      "displayName": "Claude Sonnet",
+      "shortName": "Sonnet",
+      "icon": { "type": "system", "value": "brain.head.profile" },
+      "family": "claude",
+      "externalFamily": "anthropic",
+      "roles": ["translator", "reviewer"],
+      "tier": "standard"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "providerId": "claude_opus",
+      "displayName": "Claude Opus",
+      "shortName": "Opus",
+      "icon": { "type": "system", "value": "brain.head.profile" },
+      "family": "claude",
+      "externalFamily": "anthropic",
+      "roles": ["reviewer"],
+      "tier": "premium"
+    }
+  ]
+}
