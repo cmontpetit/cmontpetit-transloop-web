@@ -6,21 +6,34 @@
       "providerId": "chatgpt_5_mini",
       "displayName": "GPT-5 mini",
       "shortName": "GPT-5 mini",
-      "icon": { "type": "asset", "value": "OpenAIProvider" },
+      "icon": {
+        "type": "asset",
+        "value": "OpenAIProvider"
+      },
       "family": "openai",
       "externalFamily": "openai",
-      "roles": ["translator", "reviewer"],
-      "tier": "economy"
+      "roles": [
+        "translator",
+        "reviewer"
+      ],
+      "tier": "economy",
+      "reasoningEffort": "minimal"
     },
     {
       "id": "gpt-4.1",
       "providerId": "chatgpt_4_1",
       "displayName": "GPT-4.1",
       "shortName": "GPT-4.1",
-      "icon": { "type": "asset", "value": "OpenAIProvider" },
+      "icon": {
+        "type": "asset",
+        "value": "OpenAIProvider"
+      },
       "family": "openai",
       "externalFamily": "openai",
-      "roles": ["translator", "reviewer"],
+      "roles": [
+        "translator",
+        "reviewer"
+      ],
       "tier": "standard"
     },
     {
@@ -28,21 +41,33 @@
       "providerId": "chatgpt_5",
       "displayName": "GPT-5",
       "shortName": "GPT-5",
-      "icon": { "type": "asset", "value": "OpenAIProvider" },
+      "icon": {
+        "type": "asset",
+        "value": "OpenAIProvider"
+      },
       "family": "openai",
       "externalFamily": "openai",
-      "roles": ["reviewer"],
-      "tier": "premium"
+      "roles": [
+        "reviewer"
+      ],
+      "tier": "premium",
+      "reasoningEffort": "minimal"
     },
     {
       "id": "claude-haiku-4-5",
       "providerId": "claude_haiku",
       "displayName": "Claude Haiku",
       "shortName": "Haiku",
-      "icon": { "type": "system", "value": "brain.head.profile" },
+      "icon": {
+        "type": "system",
+        "value": "brain.head.profile"
+      },
       "family": "claude",
       "externalFamily": "anthropic",
-      "roles": ["translator", "reviewer"],
+      "roles": [
+        "translator",
+        "reviewer"
+      ],
       "tier": "economy"
     },
     {
@@ -50,10 +75,16 @@
       "providerId": "claude_sonnet",
       "displayName": "Claude Sonnet",
       "shortName": "Sonnet",
-      "icon": { "type": "system", "value": "brain.head.profile" },
+      "icon": {
+        "type": "system",
+        "value": "brain.head.profile"
+      },
       "family": "claude",
       "externalFamily": "anthropic",
-      "roles": ["translator", "reviewer"],
+      "roles": [
+        "translator",
+        "reviewer"
+      ],
       "tier": "standard"
     },
     {
@@ -61,10 +92,15 @@
       "providerId": "claude_opus",
       "displayName": "Claude Opus",
       "shortName": "Opus",
-      "icon": { "type": "system", "value": "brain.head.profile" },
+      "icon": {
+        "type": "system",
+        "value": "brain.head.profile"
+      },
       "family": "claude",
       "externalFamily": "anthropic",
-      "roles": ["reviewer"],
+      "roles": [
+        "reviewer"
+      ],
       "tier": "premium"
     }
   ]
