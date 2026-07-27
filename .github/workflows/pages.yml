@@ -22,17 +22,77 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate models.json
+      - name: Validate manifests
         run: |
           python3 - <<'PY'
           import json, sys
-          d = json.load(open("docs/models.json"))
-          assert d["schemaVersion"] == 1, "unexpected schemaVersion"
-          assert isinstance(d["models"], list) and d["models"], "no models"
-          for m in d["models"]:
-              for k in ("id","providerId","displayName","shortName","icon","family","externalFamily","roles","tier"):
-                  assert k in m, f"missing {k} in {m.get('providerId')}"
-          print(f"OK: schemaVersion 1, {len(d['models'])} models")
+
+          # Must match the Swift side: an unrecognized enum value makes
+          # ModelCatalogEntry.toEntry() return nil, which SILENTLY drops that
+          # model from every device on the next fetch. Key presence alone does
+          # not catch that, so validate the vocabularies too.
+          FAMILIES = {"claude", "openai"}
+          # Deliberately narrower than the app's ExternalProviderFamily, which
+          # also has google/deepl: those bill the model-less translation
+          # providers, which are registered in code and never in this catalog.
+          EXTERNAL_FAMILIES = {"anthropic", "openai"}
+          REQUIRED_EXTERNAL = {"claude": "anthropic", "openai": "openai"}
+          TIERS = {"economy", "standard", "premium"}
+          ROLES = {"translator", "reviewer"}
+          ICON_TYPES = {"asset", "system"}
+          REQUIRED = ("id", "providerId", "displayName", "shortName", "icon",
+                      "family", "externalFamily", "roles", "tier")
+          OPTIONAL_BOOL = ("supportsStructuredOutput", "supportsDisabledThinking")
+          MAX_MODELS = 64      # ModelCatalog.maxModels
+          MAX_NAME = 40        # ModelCatalog.maxNameLength
+
+          def check(path):
+              d = json.load(open(path))
+              assert d["schemaVersion"] == 1, f"{path}: unexpected schemaVersion"
+              models = d["models"]
+              assert isinstance(models, list) and models, f"{path}: no models"
+              assert len(models) <= MAX_MODELS, f"{path}: >{MAX_MODELS} models (client truncates)"
+              seen = set()
+              for m in models:
+                  pid = m.get("providerId")
+                  for k in REQUIRED:
+                      assert k in m, f"{path}: missing {k} in {pid}"
+                  assert pid not in seen, f"{path}: duplicate providerId {pid}"
+                  seen.add(pid)
+                  assert m["id"] and pid, f"{path}: empty id/providerId in {pid}"
+                  assert m["family"] in FAMILIES, f"{path}: bad family {m['family']} in {pid}"
+                  assert m["externalFamily"] in EXTERNAL_FAMILIES, \
+                      f"{path}: bad externalFamily {m['externalFamily']} in {pid}"
+                  # family drives the endpoint + API key; externalFamily drives
+                  # routing/availability. A mismatched pair makes them disagree,
+                  # so the app rejects it — fail here rather than shipping an
+                  # entry that silently vanishes on device.
+                  assert m["externalFamily"] == REQUIRED_EXTERNAL[m["family"]], \
+                      (f"{path}: family {m['family']} requires externalFamily "
+                       f"{REQUIRED_EXTERNAL[m['family']]}, got {m['externalFamily']} in {pid}")
+                  assert m["tier"] in TIERS, f"{path}: bad tier {m['tier']} in {pid}"
+                  assert m["roles"], f"{path}: empty roles in {pid}"
+                  bad = set(m["roles"]) - ROLES
+                  assert not bad, f"{path}: bad roles {bad} in {pid}"
+                  assert m["icon"].get("type") in ICON_TYPES, \
+                      f"{path}: bad icon type in {pid}"
+                  assert m["icon"].get("value"), f"{path}: empty icon value in {pid}"
+                  for k in ("displayName", "shortName"):
+                      assert len(m[k]) <= MAX_NAME, \
+                          f"{path}: {k} >{MAX_NAME} chars in {pid} (client truncates)"
+                  for k in OPTIONAL_BOOL:
+                      if k in m:
+                          assert isinstance(m[k], bool), f"{path}: {k} must be bool in {pid}"
+                  if m.get("reasoningEffort") is not None:
+                      assert m["family"] == "openai", \
+                          f"{path}: reasoningEffort on non-openai model {pid}"
+              # A manifest with no reviewer leaves the AI Verdicts panel empty.
+              assert any("reviewer" in m["roles"] for m in models), f"{path}: no reviewer model"
+              print(f"OK {path}: schemaVersion 1, {len(models)} models")
+
+          # models-dev.json ships to DEBUG builds, which prefer it — validate both.
+          for p in ("docs/models.json", "docs/models-dev.json"):
+              check(p)
           PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
