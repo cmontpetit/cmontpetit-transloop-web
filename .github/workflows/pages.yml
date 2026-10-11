@@ -43,6 +43,10 @@ jobs:
           REQUIRED = ("id", "providerId", "displayName", "shortName", "icon",
                       "family", "externalFamily", "roles", "tier")
           OPTIONAL_BOOL = ("supportsStructuredOutput", "supportsDisabledThinking")
+          EFFORTS = {
+              "openai": {"none", "minimal", "low", "medium", "high", "xhigh", "max"},
+              "claude": {"low", "medium", "high", "xhigh", "max"},
+          }
           MAX_MODELS = 64      # ModelCatalog.maxModels
           MAX_NAME = 40        # ModelCatalog.maxNameLength
 
@@ -83,9 +87,13 @@ jobs:
                   for k in OPTIONAL_BOOL:
                       if k in m:
                           assert isinstance(m[k], bool), f"{path}: {k} must be bool in {pid}"
+                  # Written to `reasoning.effort` (openai) or
+                  # `output_config.effort` (claude); each takes its own set.
                   if m.get("reasoningEffort") is not None:
-                      assert m["family"] == "openai", \
-                          f"{path}: reasoningEffort on non-openai model {pid}"
+                      allowed = EFFORTS[m["family"]]
+                      assert m["reasoningEffort"] in allowed, \
+                          (f"{path}: reasoningEffort {m['reasoningEffort']!r} not in "
+                           f"{sorted(allowed)} for {m['family']} model {pid}")
               # A manifest with no reviewer leaves the AI Verdicts panel empty.
               assert any("reviewer" in m["roles"] for m in models), f"{path}: no reviewer model"
               print(f"OK {path}: schemaVersion 1, {len(models)} models")

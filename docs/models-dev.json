@@ -37,10 +37,10 @@
       "reasoningEffort": "low"
     },
     {
-      "id": "claude-haiku-4-5",
+      "id": "claude-haiku-5-5",
       "providerId": "claude_haiku",
-      "displayName": "Claude Haiku",
-      "shortName": "Haiku",
+      "displayName": "Claude Haiku 5.5",
+      "shortName": "Haiku 5.5",
       "icon": {
         "type": "system",
         "value": "brain.head.profile"
@@ -51,13 +51,15 @@
         "translator",
         "reviewer"
       ],
-      "tier": "economy"
+      "tier": "economy",
+      "reasoningEffort": "low",
+      "supportsDisabledThinking": false
     },
     {
-      "id": "claude-sonnet-5",
+      "id": "claude-sonnet-5-5",
       "providerId": "claude_sonnet",
-      "displayName": "Claude Sonnet",
-      "shortName": "Sonnet",
+      "displayName": "Claude Sonnet 5.5",
+      "shortName": "Sonnet 5.5",
       "icon": {
         "type": "system",
         "value": "brain.head.profile"
@@ -68,13 +70,15 @@
         "translator",
         "reviewer"
       ],
-      "tier": "standard"
+      "tier": "standard",
+      "reasoningEffort": "low",
+      "supportsDisabledThinking": false
     },
     {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "providerId": "claude_opus",
-      "displayName": "Claude Opus",
-      "shortName": "Opus",
+      "displayName": "Claude Opus 5.5",
+      "shortName": "Opus 5.5",
       "icon": {
         "type": "system",
         "value": "brain.head.profile"
@@ -84,7 +88,9 @@
       "roles": [
         "reviewer"
       ],
-      "tier": "premium"
+      "tier": "premium",
+      "reasoningEffort": "low",
+      "supportsDisabledThinking": false
     }
   ]
 }
