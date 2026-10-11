@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "models": [
     {
-      "id": "gpt-5-mini",
+      "id": "gpt-6-luna",
       "providerId": "chatgpt_5_mini",
-      "displayName": "GPT-5 mini",
-      "shortName": "GPT-5 mini",
+      "displayName": "GPT-6 Luna",
+      "shortName": "GPT-6 Luna",
       "icon": {
         "type": "asset",
         "value": "OpenAIProvider"
@@ -17,30 +17,13 @@
         "reviewer"
       ],
       "tier": "economy",
-      "reasoningEffort": "minimal"
+      "reasoningEffort": "none"
     },
     {
-      "id": "gpt-4.1",
-      "providerId": "chatgpt_4_1",
-      "displayName": "GPT-4.1",
-      "shortName": "GPT-4.1",
-      "icon": {
-        "type": "asset",
-        "value": "OpenAIProvider"
-      },
-      "family": "openai",
-      "externalFamily": "openai",
-      "roles": [
-        "translator",
-        "reviewer"
-      ],
-      "tier": "standard"
-    },
-    {
-      "id": "gpt-5",
+      "id": "gpt-6.1-sol",
       "providerId": "chatgpt_5",
-      "displayName": "GPT-5",
-      "shortName": "GPT-5",
+      "displayName": "GPT-6.1 Sol",
+      "shortName": "GPT-6.1 Sol",
       "icon": {
         "type": "asset",
         "value": "OpenAIProvider"
@@ -51,7 +34,7 @@
         "reviewer"
       ],
       "tier": "premium",
-      "reasoningEffort": "minimal"
+      "reasoningEffort": "low"
     },
     {
       "id": "claude-haiku-4-5",
@@ -88,7 +71,7 @@
       "tier": "standard"
     },
     {
-      "id": "claude-opus-4-8",
+      "id": "claude-opus-5",
       "providerId": "claude_opus",
       "displayName": "Claude Opus",
       "shortName": "Opus",
