@@ -31,6 +31,7 @@
       "family": "openai",
       "externalFamily": "openai",
       "roles": [
+        "translator",
         "reviewer"
       ],
       "tier": "premium",
@@ -86,6 +87,7 @@
       "family": "claude",
       "externalFamily": "anthropic",
       "roles": [
+        "translator",
         "reviewer"
       ],
       "tier": "premium",
